@@ -1,334 +1,482 @@
-/* Flori Website Styles */
+/* ==========================================================================
+   Flori — myflori.com
+
+   The palette and typeface are the app's, not the website's. Every token
+   below is lifted from src/theme/colors.ts so that someone arriving here
+   from the App Store listing sees the same product they are about to
+   install. The previous version used a system font stack and a sage
+   gradient that appeared nowhere in the app.
+
+   Deliberately single-theme. Moss and cream ARE the identity — the hero and
+   footer already carry the dark half of the page's rhythm, and a half-hearted
+   inversion would read worse than committing. Every colour is painted
+   explicitly so nothing borrows from the host.
+   ========================================================================== */
 
 :root {
-  --color-primary: #6C9385;
-  --color-primary-dark: #5A7D71;
-  --color-background: #E8EFED;
-  --color-text: #2C3E50;
-  --color-text-light: #7F8C8D;
-  --color-white: #FFFFFF;
-  --color-border: #D5E0DD;
-  --max-width: 1200px;
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 3rem;
-  --spacing-xl: 4rem;
+  /* Brand — the identity palette, from the mark and splash. */
+  --moss: #3D5646;
+  --ink: #141F19;
+  --cream: #F4EFE4;
+  --cream-deep: #E8E2D4;
+  --terracotta: #D98A52;
+
+  /* Sage — the primary ramp. 500 is the brand colour. */
+  --sage-100: #E4EDE9;
+  --sage-300: #A3C2B6;
+  --sage-500: #6C9385;
+  --sage-700: #456155;
+
+  /* Neutrals — warm, but only just. */
+  --ground: #F7F5F1;
+  --surface: #FFFFFF;
+  --surface-alt: #F1EFEA;
+  --ink-secondary: #414B45;
+  --ink-muted: #6C756F;
+  --line: #E7E4DE;
+
+  /* On moss. */
+  --on-moss: var(--cream);
+  --on-moss-muted: #A9BCAF;
+
+  --measure: 62ch;
+  --wrap: 1140px;
+  --pad: clamp(1.25rem, 4vw, 2rem);
+
+  --font: 'Fraunces', Georgia, 'Times New Roman', serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-  background-color: var(--color-background);
-  color: var(--color-text);
-  line-height: 1.6;
-  font-size: 16px;
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: clamp(1rem, .96rem + .2vw, 1.0625rem);
+  line-height: 1.65;
+  background: var(--ground);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
 
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color 0.2s ease;
+/* Fraunces carries an optical-size axis. Small text wants the low end (open
+   apertures, sturdier stems); display text wants the high end, where the
+   serifs get their bracket back. The app cannot do this — React Native
+   cannot select variable-font axes — so the web gets the better setting. */
+h1, h2, h3 {
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+  font-variation-settings: 'opsz' 120;
 }
 
-a:hover {
-  color: var(--color-primary-dark);
+a { color: var(--sage-700); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+a:hover { color: var(--ink); }
+
+:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+  border-radius: 3px;
 }
+
+img, svg { max-width: 100%; display: block; }
 
 .container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--pad);
 }
 
-/* Header */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--cream);
+  color: var(--moss);
+  padding: .75rem 1rem;
+  z-index: 200;
+}
+.skip-link:focus { left: 0; }
+
+.eyebrow {
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-variation-settings: 'opsz' 9;
+  margin-bottom: .75rem;
+}
+
+/* --------------------------------------------------------------------------
+   Header
+
+   Sits on moss, and so does the hero — so at the top of the page the header
+   dissolves into it and only separates once you scroll past onto the ground.
+   No JS scroll listener needed to get that.
+   -------------------------------------------------------------------------- */
 header {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  color: var(--color-white);
-  padding: var(--spacing-md) 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: var(--moss);
+  color: var(--on-moss);
 }
 
 header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 68px;
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  color: var(--cream);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  text-decoration: none;
+}
+.logo:hover { color: var(--cream); }
+.logo img { width: 34px; height: 34px; border-radius: 9px; }
+.logo-mark { width: 34px; height: 34px; flex: none; }
+
+header nav {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-white);
+  gap: clamp(.9rem, 3vw, 1.75rem);
 }
 
-.logo img {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+header nav a {
+  color: var(--on-moss-muted);
+  font-size: .95rem;
+  text-decoration: none;
 }
+header nav a:hover { color: var(--cream); }
 
-nav a {
-  color: var(--color-white);
-  margin-left: var(--spacing-md);
-  font-weight: 500;
-  opacity: 0.9;
-}
-
-nav a:hover {
-  opacity: 1;
-  color: var(--color-white);
-}
-
-/* Hero Section */
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
 .hero {
-  text-align: center;
-  padding: var(--spacing-xl) 0;
-  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-background) 100%);
+  background: var(--moss);
+  color: var(--on-moss);
+  padding-block: clamp(3rem, 9vw, 6.5rem) clamp(3.5rem, 10vw, 7rem);
 }
 
-.hero-icon {
-  width: 120px;
-  height: 120px;
-  border-radius: 24px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  margin-bottom: var(--spacing-md);
+.hero-inner {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+  align-items: center;
 }
+
+/* Two-up only once there is room for a phone beside the type. Until the
+   screenshot slot is filled the grid stays one column regardless. */
+@media (min-width: 900px) {
+  .hero-inner:has(.hero-shot) { grid-template-columns: 1.15fr .85fr; }
+}
+
+.hero-copy { max-width: 34ch; }
 
 .hero h1 {
-  font-size: 3rem;
-  color: var(--color-white);
-  margin-bottom: var(--spacing-xs);
+  font-size: clamp(2.5rem, 6.2vw, 4rem);
+  font-variation-settings: 'opsz' 144;
+  margin-bottom: 1rem;
 }
 
-.hero .tagline {
-  font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: var(--spacing-sm);
+.hero-sub {
+  font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+  color: var(--cream-deep);
+  max-width: 32ch;
 }
 
-.hero .description {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 600px;
-  margin: 0 auto var(--spacing-lg);
+.hero-for {
+  margin-top: 1.1rem;
+  font-size: .95rem;
+  color: var(--on-moss-muted);
+  max-width: 40ch;
 }
 
+/* --------------------------------------------------------------------------
+   Store buttons
+
+   Both get equal weight: we have no idea which platform the reader is on,
+   and demoting one is a coin flip that costs half the audience a step.
+   -------------------------------------------------------------------------- */
 .store-buttons {
   display: flex;
-  justify-content: center;
-  gap: var(--spacing-sm);
   flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 2rem;
 }
 
 .store-button {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  background: var(--color-white);
-  color: var(--color-text);
-  padding: var(--spacing-sm) var(--spacing-md);
+  gap: .7rem;
+  padding: .7rem 1.15rem;
   border-radius: 12px;
+  background: var(--cream);
+  color: var(--moss);
+  text-decoration: none;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.store-button svg { width: 26px; height: 26px; flex: none; }
+
+.store-button span {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.05rem;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+}
+
+.store-button small {
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  opacity: .68;
+  font-variation-settings: 'opsz' 9;
 }
 
 .store-button:hover {
+  color: var(--moss);
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  color: var(--color-text);
+  box-shadow: 0 10px 24px rgba(20, 31, 25, .22);
 }
 
-.store-button svg {
-  width: 24px;
-  height: 24px;
+/* On the light closing section the same button inverts. */
+.closing .store-button { background: var(--moss); color: var(--cream); }
+.closing .store-button:hover { color: var(--cream); }
+
+/* --------------------------------------------------------------------------
+   How it works
+
+   Numbered because it genuinely is a sequence — log, analyse, understand,
+   act. The numerals are the one other place terracotta is spent.
+   -------------------------------------------------------------------------- */
+.how { padding-block: clamp(3.5rem, 9vw, 6rem); }
+
+.how h2 {
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  max-width: 20ch;
+  margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
 }
 
-/* Features Section */
-.features {
-  padding: var(--spacing-xl) 0;
-}
-
-.features h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: var(--spacing-lg);
-  color: var(--color-text);
-}
-
-.features-grid {
+.steps {
+  list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-md);
+  gap: clamp(2rem, 4vw, 2.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
 }
 
-.feature-card {
-  background: var(--color-white);
-  padding: var(--spacing-md);
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.step { position: relative; }
+
+.step-num {
+  display: block;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  font-variation-settings: 'opsz' 9;
+  margin-bottom: 1rem;
 }
 
-.feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+.step-icon {
+  width: 30px;
+  height: 30px;
+  color: var(--sage-500);
+  margin-bottom: .9rem;
 }
 
-.feature-icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--spacing-sm);
+.step h3 {
+  font-size: 1.25rem;
+  margin-bottom: .5rem;
+  font-variation-settings: 'opsz' 60;
 }
 
-.feature-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: var(--spacing-xs);
-  color: var(--color-text);
+.step p {
+  color: var(--ink-secondary);
+  font-size: .975rem;
+  line-height: 1.6;
 }
 
-.feature-card p {
-  color: var(--color-text-light);
-  font-size: 0.95rem;
+.also {
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+  max-width: var(--measure);
+  color: var(--ink-muted);
+  font-size: .95rem;
 }
 
-/* Footer */
-footer {
-  background: var(--color-text);
-  color: var(--color-white);
-  padding: var(--spacing-lg) 0;
-  margin-top: var(--spacing-xl);
+/* --------------------------------------------------------------------------
+   Screenshot gallery + device frame
+
+   Written and waiting. Drop portrait PNGs into images/screens/ and delete
+   the comment markers in index.html — nothing here needs changing.
+   -------------------------------------------------------------------------- */
+.gallery {
+  background: var(--surface-alt);
+  border-block: 1px solid var(--line);
+  padding-block: clamp(3.5rem, 9vw, 6rem);
 }
 
-footer .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-md);
+.gallery h2 {
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
 }
 
-.footer-links {
-  display: flex;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
-  justify-content: center;
+.shots {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-.footer-links a {
-  color: rgba(255, 255, 255, 0.8);
+.shots figure { display: grid; gap: .9rem; justify-items: center; }
+
+.shots figcaption {
+  font-size: .875rem;
+  color: var(--ink-muted);
+  text-align: center;
 }
 
-.footer-links a:hover {
-  color: var(--color-white);
+.device {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1170 / 2532;
+  border-radius: 34px;
+  padding: 7px;
+  background: var(--ink);
+  box-shadow: 0 18px 40px rgba(20, 31, 25, .16);
+  overflow: hidden;
 }
 
-.footer-contact {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
+.device img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 27px;
+  background: var(--sage-100);
 }
 
-.footer-copyright {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.85rem;
+.hero-shot { display: grid; justify-items: center; }
+.hero-shot .device { max-width: 288px; }
+
+/* --------------------------------------------------------------------------
+   Closing
+   -------------------------------------------------------------------------- */
+.closing {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  padding-block: clamp(3.5rem, 9vw, 6rem);
 }
 
-/* Legal Pages */
+.closing blockquote {
+  max-width: 34ch;
+  border-left: 3px solid var(--terracotta);
+  padding-left: clamp(1.25rem, 3vw, 2rem);
+  display: grid;
+  gap: 1.1rem;
+}
+
+.closing blockquote p {
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+  line-height: 1.4;
+  letter-spacing: -.015em;
+  font-variation-settings: 'opsz' 90;
+}
+
+.closing blockquote p:last-child { color: var(--ink-secondary); }
+
+/* --------------------------------------------------------------------------
+   Legal pages — privacy.html and terms.html share this stylesheet and use
+   .legal-content / .last-updated. Keep both working.
+   -------------------------------------------------------------------------- */
 .legal-content {
-  background: var(--color-white);
-  padding: var(--spacing-lg);
-  border-radius: 16px;
-  margin: var(--spacing-lg) 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
 }
 
 .legal-content h1 {
-  font-size: 2rem;
-  margin-bottom: var(--spacing-xs);
-  color: var(--color-text);
-}
-
-.legal-content .last-updated {
-  color: var(--color-text-light);
-  margin-bottom: var(--spacing-lg);
-  font-size: 0.9rem;
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  margin-bottom: .5rem;
 }
 
 .legal-content h2 {
-  font-size: 1.4rem;
-  margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-sm);
-  color: var(--color-primary);
+  font-size: 1.35rem;
+  margin-top: 2.25rem;
+  margin-bottom: .6rem;
+  font-variation-settings: 'opsz' 60;
 }
 
 .legal-content h3 {
   font-size: 1.1rem;
-  margin-top: var(--spacing-md);
-  margin-bottom: var(--spacing-xs);
-  color: var(--color-text);
+  margin-top: 1.5rem;
+  margin-bottom: .4rem;
+  font-variation-settings: 'opsz' 40;
 }
 
-.legal-content p {
-  margin-bottom: var(--spacing-sm);
-  color: var(--color-text);
+.legal-content p,
+.legal-content li { color: var(--ink-secondary); margin-bottom: .85rem; }
+.legal-content ul, .legal-content ol { padding-left: 1.35rem; margin-bottom: 1.25rem; }
+.legal-content li { margin-bottom: .4rem; }
+
+.last-updated {
+  color: var(--ink-muted);
+  font-size: .9rem;
+  margin-bottom: 2rem;
 }
 
-.legal-content ul {
-  margin-left: var(--spacing-md);
-  margin-bottom: var(--spacing-sm);
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+footer {
+  background: var(--moss);
+  color: var(--on-moss-muted);
+  padding-block: clamp(2.5rem, 6vw, 3.5rem);
+  font-size: .925rem;
 }
 
-.legal-content li {
-  margin-bottom: var(--spacing-xs);
-  color: var(--color-text);
+footer .container { display: grid; gap: .85rem; }
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
+.footer-links a,
+.footer-contact a { color: var(--cream); text-decoration: none; }
+.footer-links a:hover,
+.footer-contact a:hover { color: var(--cream); text-decoration: underline; }
 
-  .hero .tagline {
-    font-size: 1.2rem;
-  }
-
-  .hero-icon {
-    width: 100px;
-    height: 100px;
-  }
-
-  header .container {
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-
-  nav {
-    display: flex;
-    gap: var(--spacing-sm);
-  }
-
-  nav a {
-    margin-left: 0;
-  }
-
-  .legal-content {
-    padding: var(--spacing-md);
-  }
-
-  .features h2 {
-    font-size: 1.5rem;
-  }
+.footer-note {
+  max-width: var(--measure);
+  font-size: .85rem;
+  color: #8B9C91;
+  padding-top: .75rem;
+  border-top: 1px solid rgba(244, 239, 228, .14);
 }
+
+.footer-copyright { font-size: .85rem; color: #8B9C91; }

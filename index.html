@@ -3,95 +3,199 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Flori - Your Gut Health Companion. Track meals, symptoms, and wellness to understand your body better.">
-  <meta name="keywords" content="gut health, food tracking, symptom tracking, wellness, health app">
+  <title>Flori — Find the foods behind how you feel</title>
+  <meta name="description" content="Log a meal, log a symptom. Flori checks every food against FODMAPs, histamine, gluten and more, then finds the pattern between what you eat and how you feel.">
   <meta name="author" content="Flori">
-  <title>Flori - Your Gut Health Companion</title>
   <link rel="canonical" href="https://myflori.com/">
+
+  <!-- Link previews. Without these, every share of myflori.com — a text, a
+       Slack message, a Reddit post — rendered as a bare URL. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Flori">
+  <meta property="og:url" content="https://myflori.com/">
+  <meta property="og:title" content="Flori — Find the foods behind how you feel">
+  <meta property="og:description" content="Log a meal, log a symptom. Flori finds the pattern between them.">
+  <meta property="og:image" content="https://myflori.com/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Flori — find the foods behind how you feel">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flori — Find the foods behind how you feel">
+  <meta name="twitter:description" content="Log a meal, log a symptom. Flori finds the pattern between them.">
+  <meta name="twitter:image" content="https://myflori.com/images/og-image.png">
+  <meta name="theme-color" content="#3D5646">
+
   <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&display=swap">
   <link rel="stylesheet" href="css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Flori",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "iOS, Android",
+    "url": "https://myflori.com/",
+    "description": "Track meals and symptoms to find the foods behind how you feel.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
   <header>
     <div class="container">
-      <a href="/" class="logo">
-        <img src="images/icon.png" alt="Flori App Icon">
+      <a href="/" class="logo" aria-label="Flori — home">
+        <!-- The mark, inlined. The F is a true knockout, so the moss behind it
+             shows through; painting it would break the identity. -->
+        <svg class="logo-mark" viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
+          <path fill="currentColor" fill-rule="evenodd"
+                d="M4 32A28 28 0 1 0 60 32A28 28 0 1 0 4 32ZM26 16L26 48L32 48L32 34L42 34L42 28L32 28L32 22L44 22L44 16Z"/>
+          <circle cx="52" cy="15" r="5.5" fill="#D98A52"/>
+        </svg>
         <span>Flori</span>
       </a>
-      <nav>
-        <a href="#features">Features</a>
+      <nav aria-label="Primary">
+        <a href="#how">How it works</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <img src="images/icon.png" alt="Flori App Icon" class="hero-icon">
-      <h1>Flori</h1>
-      <p class="tagline">Your Gut Health Companion</p>
-      <p class="description">Track your meals, symptoms, and wellness to understand your body better. Discover patterns, get personalized insights, and take control of your gut health.</p>
-      <div class="store-buttons">
-        <a href="https://apps.apple.com/us/app/flori-gut-health/id6759988365" class="store-button">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          App Store
-        </a>
-        <a href="https://play.google.com/store/apps/details?id=com.myflori.app" class="store-button">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
-          Google Play
-        </a>
-      </div>
-    </div>
-  </section>
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Find the foods behind how you feel.</h1>
+          <p class="hero-sub">Log a meal, log a symptom. Flori finds the pattern between them.</p>
+          <p class="hero-for">For IBS, SIBO, histamine intolerance — and everyone still working it out.</p>
 
-  <section class="features" id="features">
-    <div class="container">
-      <h2>Everything You Need for Better Gut Health</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🍽️</div>
-          <h3>Smart Food Logging</h3>
-          <p>Log meals with voice, photos, or barcode scanning. Track what you eat effortlessly throughout the day.</p>
+          <div class="store-buttons">
+            <a class="store-button" href="https://apps.apple.com/us/app/flori-gut-health/id6759988365">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <span><small>Download on the</small>App Store</span>
+            </a>
+            <a class="store-button" href="https://play.google.com/store/apps/details?id=com.myflori.app">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+              <span><small>Get it on</small>Google Play</span>
+            </a>
+          </div>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h3>Symptom Tracking</h3>
-          <p>Record symptoms with severity ratings and discover patterns between your diet and how you feel.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🤖</div>
-          <h3>AI Coach</h3>
-          <p>Get personalized insights and recommendations from your AI-powered gut health coach.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌱</div>
-          <h3>Plant Diversity</h3>
-          <p>Track your weekly plant variety to support a healthy microbiome with diverse fiber sources.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">😴</div>
-          <h3>Wellness Tracking</h3>
-          <p>Monitor sleep, mood, exercise, and stress levels to see how lifestyle affects your gut.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🧘</div>
-          <h3>Breathing Exercises</h3>
-          <p>Activate your vagus nerve with guided breathing exercises for better gut-brain connection.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <h3>Weekly Challenges</h3>
-          <p>Take on elimination challenges and focus areas to identify trigger foods and improve habits.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📋</div>
-          <h3>Health Reports</h3>
-          <p>Generate comprehensive PDF reports to share with your healthcare provider.</p>
+
+        <!-- SCREENSHOT SLOT — hero.
+             Drop a portrait screenshot at images/screens/hero.png (roughly
+             1170x2532, an iPhone capture is exactly right) and delete the two
+             comment markers around the figure below. Until then the hero runs
+             type-only rather than showing an empty frame.
+        <figure class="hero-shot">
+          <div class="device">
+            <img src="images/screens/hero.png" alt="The Flori home screen showing today's logs and insights" width="1170" height="2532">
+          </div>
+        </figure>
+        -->
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="container">
+        <p class="eyebrow">How it works</p>
+        <h2>Four steps, and the fourth is the one your doctor wants.</h2>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">01</span>
+            <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="2.5" y="6.5" width="19" height="13" rx="2.5"/>
+              <path d="M8.5 6.5 10 4h4l1.5 2.5"/>
+              <circle cx="12" cy="13" r="3.5"/>
+            </svg>
+            <h3>Log a meal in seconds</h3>
+            <p>Photograph it, say it out loud, or scan the barcode. Flori fills in the ingredients, calories and macros so you can put your phone back down.</p>
+          </li>
+
+          <li class="step">
+            <span class="step-num">02</span>
+            <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M9.5 3v5.2L4.6 17.4A2 2 0 0 0 6.4 20.5h11.2a2 2 0 0 0 1.8-3.1L14.5 8.2V3"/>
+              <path d="M8.5 3h7"/>
+              <path d="M7.2 14h9.6"/>
+            </svg>
+            <h3>See what it flags</h3>
+            <p>Every food is checked against FODMAPs, histamine, gluten, lactose, salicylates, oxalates and a dozen more. You hear about the ones that flag. The rest stay quiet.</p>
+          </li>
+
+          <li class="step">
+            <span class="step-num">03</span>
+            <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M3 16.5l5-5 3.5 3.5L21 6"/>
+              <path d="M15.5 6H21v5.5"/>
+              <path d="M3 20.5h18"/>
+            </svg>
+            <h3>Find the pattern</h3>
+            <p>Record how you feel and Flori lines it up against what you ate. Bloating on Tuesday and again on Friday stops being a coincidence and starts pointing somewhere.</p>
+          </li>
+
+          <li class="step">
+            <span class="step-num">04</span>
+            <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+              <path d="M14 3v5h5"/>
+              <path d="M9 13h6M9 17h4"/>
+            </svg>
+            <h3>Take it to your doctor</h3>
+            <p>One tap turns weeks of logs into a PDF your GP or dietitian can read in a minute — meals, symptoms, severities and the correlations between them.</p>
+          </li>
+        </ol>
+
+        <p class="also">Flori also tracks sleep, mood, stress, exercise, hydration and weekly plant variety, and runs guided breathing and elimination challenges for when you want to go further.</p>
+      </div>
+    </section>
+
+    <!-- SCREENSHOT SLOT — gallery.
+         Drop four portrait captures into images/screens/ named home.png,
+         log.png, trends.png and report.png, then delete the two comment
+         markers around this section. The captions are written; only the
+         images are missing.
+    <section class="gallery">
+      <div class="container">
+        <p class="eyebrow">Inside the app</p>
+        <h2>What it actually looks like.</h2>
+        <div class="shots">
+          <figure><div class="device"><img src="images/screens/home.png" alt="The Flori home screen" width="1170" height="2532"></div><figcaption>Today at a glance</figcaption></figure>
+          <figure><div class="device"><img src="images/screens/log.png" alt="Logging a meal in Flori" width="1170" height="2532"></div><figcaption>Logging a meal</figcaption></figure>
+          <figure><div class="device"><img src="images/screens/trends.png" alt="Trends and correlations in Flori" width="1170" height="2532"></div><figcaption>Patterns over time</figcaption></figure>
+          <figure><div class="device"><img src="images/screens/report.png" alt="A Flori health report" width="1170" height="2532"></div><figcaption>The report you share</figcaption></figure>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+    -->
+
+    <section class="closing">
+      <div class="container">
+        <blockquote>
+          <p>Most people arrive here after months of guessing. A food diary in a notebook, a hunch about bread, a flare with no obvious cause.</p>
+          <p>Flori is the part guessing cannot do — holding every meal and every symptom in one place, long enough for the pattern to show itself.</p>
+        </blockquote>
+        <div class="store-buttons">
+          <a class="store-button" href="https://apps.apple.com/us/app/flori-gut-health/id6759988365">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <span><small>Download on the</small>App Store</span>
+          </a>
+          <a class="store-button" href="https://play.google.com/store/apps/details?id=com.myflori.app">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+            <span><small>Get it on</small>Google Play</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="container">
@@ -99,7 +203,8 @@
         <a href="privacy.html">Privacy Policy</a>
         <a href="terms.html">Terms of Use</a>
       </div>
-      <p class="footer-contact">Contact: <a href="mailto:support@myflori.com">support@myflori.com</a></p>
+      <p class="footer-contact">Questions? <a href="mailto:support@myflori.com">support@myflori.com</a></p>
+      <p class="footer-note">Flori is a tracking tool, not a medical device. It does not diagnose or treat any condition — talk to your doctor about anything it surfaces.</p>
       <p class="footer-copyright">&copy; 2026 Flori. All rights reserved.</p>
     </div>
   </footer>
