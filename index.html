@@ -46,7 +46,7 @@
   }
   </script>
 </head>
-<body>
+<body id="top">
   <a href="#main" class="skip-link">Skip to content</a>
 
   <header>
@@ -78,7 +78,7 @@
           <p class="hero-for">For IBS, SIBO, histamine intolerance — and everyone still working it out.</p>
 
           <div class="store-buttons">
-            <a class="store-button" href="https://apps.apple.com/us/app/flori-gut-health/id6759988365">
+            <a class="store-button" href="https://apps.apple.com/app/id6759988365">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
               <span><small>Download on the</small>App Store</span>
             </a>
@@ -89,17 +89,18 @@
           </div>
         </div>
 
-        <!-- SCREENSHOT SLOT — hero.
-             Drop a portrait screenshot at images/screens/hero.png (roughly
-             1170x2532, an iPhone capture is exactly right) and delete the two
-             comment markers around the figure below. Until then the hero runs
-             type-only rather than showing an empty frame.
         <figure class="hero-shot">
-          <div class="device">
-            <img src="images/screens/hero.png" alt="The Flori home screen showing today's logs and insights" width="1170" height="2532">
+          <div class="hero-phone hero-phone-back">
+            <div class="device">
+              <img src="images/screens/hero-home.jpg" alt="" width="604" height="1313" loading="eager" decoding="async">
+            </div>
+          </div>
+          <div class="hero-phone hero-phone-front">
+            <div class="device">
+              <img src="images/screens/hero-meal.jpg" alt="A logged meal in Flori: the photograph, its calories and macros, and the analysis beneath" width="604" height="1313" loading="eager" decoding="async">
+            </div>
           </div>
         </figure>
-        -->
       </div>
     </section>
 
@@ -158,24 +159,52 @@
       </div>
     </section>
 
-    <!-- SCREENSHOT SLOT — gallery.
-         Drop four portrait captures into images/screens/ named home.png,
-         log.png, trends.png and report.png, then delete the two comment
-         markers around this section. The captions are written; only the
-         images are missing.
     <section class="gallery">
       <div class="container">
         <p class="eyebrow">Inside the app</p>
         <h2>What it actually looks like.</h2>
         <div class="shots">
-          <figure><div class="device"><img src="images/screens/home.png" alt="The Flori home screen" width="1170" height="2532"></div><figcaption>Today at a glance</figcaption></figure>
-          <figure><div class="device"><img src="images/screens/log.png" alt="Logging a meal in Flori" width="1170" height="2532"></div><figcaption>Logging a meal</figcaption></figure>
-          <figure><div class="device"><img src="images/screens/trends.png" alt="Trends and correlations in Flori" width="1170" height="2532"></div><figcaption>Patterns over time</figcaption></figure>
-          <figure><div class="device"><img src="images/screens/report.png" alt="A Flori health report" width="1170" height="2532"></div><figcaption>The report you share</figcaption></figure>
+          <figure><div class="device"><img src="images/screens/scan.jpg" alt="A meal photographed and analysed, with its name and flags" width="604" height="1313" loading="lazy" decoding="async"></div><figcaption>Point the camera</figcaption></figure>
+          <figure><div class="device"><img src="images/screens/read.jpg" alt="Estimated nutrition and the ingredients Flori detected" width="604" height="1313" loading="lazy" decoding="async"></div><figcaption>Ingredients and macros, filled in</figcaption></figure>
+          <figure><div class="device"><img src="images/screens/breakdown.jpg" alt="Per-food analysis, each item showing only the markers that flagged" width="604" height="1313" loading="lazy" decoding="async"></div><figcaption>What each food contributes</figcaption></figure>
+          <figure><div class="device"><img src="images/screens/journal.jpg" alt="The Flori journal with the logged meal" width="604" height="1313" loading="lazy" decoding="async"></div><figcaption>Saved to your journal</figcaption></figure>
         </div>
       </div>
     </section>
-    -->
+
+    <section class="demo" id="demo">
+      <div class="container">
+        <p class="eyebrow">Try it</p>
+        <h2>This is a real scan. Tap anything on the plate.</h2>
+        <p class="demo-lede">One photograph of a Mediterranean breakfast, run through Flori. It looks
+          like the healthiest thing on the menu. It flags eight different ways — and a single small
+          bowl of red dip accounts for most of them.</p>
+
+        <div class="demo-grid">
+          <figure class="demo-photo">
+            <img src="images/demo/breakfast.jpg"
+                 srcset="images/demo/breakfast.jpg 920w, images/demo/breakfast@2x.jpg 1840w"
+                 sizes="(min-width: 900px) 420px, 92vw"
+                 alt="A Mediterranean breakfast platter: scrambled eggs, toasted bread, salad, olives, three dips, cheese, walnuts and black coffee"
+                 width="920" height="1380" loading="lazy" decoding="async">
+          </figure>
+
+          <div class="demo-panel">
+            <h3 id="demoTitle">Mediterranean Breakfast Platter</h3>
+            <p class="demo-summary" id="demoSummary"></p>
+
+            <p class="demo-prompt">The whole plate</p>
+            <div class="demo-chips" id="demoChips" aria-live="polite"></div>
+
+            <p class="demo-prompt">Or one item at a time <span id="demoCount"></span></p>
+            <div class="demo-foods" id="demoFoods"></div>
+          </div>
+        </div>
+
+        <p class="demo-note">Flori runs this on whatever you photograph, against the sensitivities you
+          actually have. This page shows all of them.</p>
+      </div>
+    </section>
 
     <section class="closing">
       <div class="container">
@@ -184,7 +213,7 @@
           <p>Flori is the part guessing cannot do — holding every meal and every symptom in one place, long enough for the pattern to show itself.</p>
         </blockquote>
         <div class="store-buttons">
-          <a class="store-button" href="https://apps.apple.com/us/app/flori-gut-health/id6759988365">
+          <a class="store-button" href="https://apps.apple.com/app/id6759988365">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
             <span><small>Download on the</small>App Store</span>
           </a>
@@ -199,14 +228,450 @@
 
   <footer>
     <div class="container">
+      <a href="#top" class="logo footer-logo">
+        <svg class="logo-mark" viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
+          <path fill="currentColor" fill-rule="evenodd"
+                d="M4 32A28 28 0 1 0 60 32A28 28 0 1 0 4 32ZM26 16L26 48L32 48L32 34L42 34L42 28L32 28L32 22L44 22L44 16Z"/>
+          <circle cx="52" cy="15" r="5.5" fill="#D98A52"/>
+        </svg>
+        <span>Flori</span>
+      </a>
+      <ul class="footer-social">
+        <li>
+          <a href="https://www.instagram.com/myflori_app/" aria-label="Flori on Instagram" rel="me noopener" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="18" height="18" rx="5.5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </li>
+        <!-- channel id, if the handle ever changes: UCNA1JwmBwdALZB_hmWaWJIw -->
+        <li>
+          <a href="https://www.youtube.com/@myflori_app" aria-label="Flori on YouTube" rel="me noopener" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false">
+              <rect x="2" y="5.5" width="20" height="13" rx="3.8"/>
+              <path d="m10.2 9.4 4.8 2.6-4.8 2.6z" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.tiktok.com/@myflori_app" aria-label="Flori on TikTok" rel="me noopener" target="_blank">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M16.4 3h-2.9v12.1a2.5 2.5 0 1 1-2.1-2.5V9.6a5.6 5.6 0 1 0 5 5.6V9.3a6.6 6.6 0 0 0 3.9 1.3V7.7a3.8 3.8 0 0 1-3.9-3.8V3Z"/>
+            </svg>
+          </a>
+        </li>
+      </ul>
       <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="mailto:support@myflori.com">support@myflori.com</a>
       </div>
-      <p class="footer-contact">Questions? <a href="mailto:support@myflori.com">support@myflori.com</a></p>
-      <p class="footer-note">Flori is a tracking tool, not a medical device. It does not diagnose or treat any condition — talk to your doctor about anything it surfaces.</p>
-      <p class="footer-copyright">&copy; 2026 Flori. All rights reserved.</p>
+      <p class="footer-fine">Flori tracks; it doesn’t diagnose — talk to your doctor about anything it surfaces. <span class="footer-sep">·</span> &copy; 2026 Flori</p>
     </div>
   </footer>
+  <script type="application/json" id="demoData">{
+  "mealName": "Mediterranean Breakfast Platter",
+  "summary": "This Mediterranean breakfast platter is high in FODMAPs, histamines, oxalates, and contains gluten, dairy, lectins, and nightshades, making it potentially problematic for individuals with multiple sensitivities. Modifications are highly recommended to reduce trigger ingredients.",
+  "confidence": 0.95,
+  "ingredients": [
+    "Eggs",
+    "Wheat bread",
+    "Lettuce",
+    "Cucumber",
+    "Tomato",
+    "Black olives",
+    "Butter",
+    "Honey",
+    "Yogurt",
+    "Herbs",
+    "Nuts (walnuts)",
+    "Cheese",
+    "Coffee"
+  ],
+  "warnings": [
+    "This meal contains multiple high FODMAP ingredients (wheat bread, honey, yogurt, potential garlic/onion in dips, tomato/red pepper paste) which can trigger SIBO symptoms.",
+    "High histamine ingredients include aged cheese, olives, yogurt, and potentially the red dip (tomato/pepper paste).",
+    "High oxalate foods include walnuts and coffee.",
+    "High sulfur foods include eggs and walnuts.",
+    "Gluten is present in the toasted bread.",
+    "Dairy/lactose is present in the yogurt dip and cheese.",
+    "Nightshades (tomato, potential red pepper paste) are present.",
+    "High salicylate foods include honey, tomatoes, olives, coffee, and potentially herbs in the green dip.",
+    "High amine foods include aged cheese, olives, and yogurt.",
+    "High glutamate is likely in the red dip (tomato paste) and aged cheese."
+  ],
+  "overall": {
+    "overallFodmapLevel": "high",
+    "overallHistamineLevel": "high",
+    "overallSulfurLevel": "moderate",
+    "overallOxalateLevel": "high",
+    "overallGlutenLevel": "contains",
+    "overallDairyLactoseLevel": "high",
+    "overallLectinLevel": "high",
+    "hasNightshades": true
+  },
+  "foods": [
+    {
+      "name": "Scrambled Eggs",
+      "fodmapLevel": "low",
+      "histamineLevel": "low",
+      "sulfurLevel": "high",
+      "oxalateLevel": "low",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "low",
+      "lectinLevel": "low",
+      "nightshade": false,
+      "salicylateLevel": "low",
+      "amineLevel": "low",
+      "glutamateLevel": "low",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Toasted Bread",
+      "fodmapLevel": "high",
+      "histamineLevel": "low",
+      "sulfurLevel": "low",
+      "oxalateLevel": "low",
+      "glutenLevel": "contains",
+      "dairyLactoseLevel": "none",
+      "lectinLevel": "high",
+      "nightshade": false,
+      "salicylateLevel": "low",
+      "amineLevel": "low",
+      "glutamateLevel": "low",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Mixed Green Salad (Lettuce, Cucumber, Tomato)",
+      "fodmapLevel": "low",
+      "histamineLevel": "moderate",
+      "sulfurLevel": "low",
+      "oxalateLevel": "low",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "none",
+      "lectinLevel": "moderate",
+      "nightshade": true,
+      "salicylateLevel": "moderate",
+      "amineLevel": "low",
+      "glutamateLevel": "low",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Black Olives",
+      "fodmapLevel": "low",
+      "histamineLevel": "moderate",
+      "sulfurLevel": "low",
+      "oxalateLevel": "low",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "none",
+      "lectinLevel": "low",
+      "nightshade": false,
+      "salicylateLevel": "moderate",
+      "amineLevel": "moderate",
+      "glutamateLevel": "low",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": true
+    },
+    {
+      "name": "Butter",
+      "fodmapLevel": "low",
+      "histamineLevel": "low",
+      "sulfurLevel": "low",
+      "oxalateLevel": "low",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "low",
+      "lectinLevel": "low",
+      "nightshade": false,
+      "salicylateLevel": "low",
+      "amineLevel": "low",
+      "glutamateLevel": "low",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Honey",
+      "fodmapLevel": "high",
+      "histamineLevel": "low",
+      "sulfurLevel": "low",
+      "oxalateLevel": "low",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "none",
+      "lectinLevel": "low",
+      "nightshade": false,
+      "salicylateLevel": "high",
+      "amineLevel": "low",
+      "glutamateLevel": "low",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Yogurt Dip (likely labneh or similar, with herbs)",
+      "fodmapLevel": "high",
+      "histamineLevel": "moderate",
+      "sulfurLevel": "low",
+      "oxalateLevel": "low",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "high",
+      "lectinLevel": "low",
+      "nightshade": false,
+      "salicylateLevel": "low",
+      "amineLevel": "moderate",
+      "glutamateLevel": "low",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Green Dip (likely pesto or herb dip)",
+      "fodmapLevel": "moderate",
+      "histamineLevel": "moderate",
+      "sulfurLevel": "low",
+      "oxalateLevel": "moderate",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "low",
+      "lectinLevel": "low",
+      "nightshade": false,
+      "salicylateLevel": "high",
+      "amineLevel": "moderate",
+      "glutamateLevel": "moderate",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Red Dip (likely tomato paste/sauce or red pepper paste)",
+      "fodmapLevel": "high",
+      "histamineLevel": "high",
+      "sulfurLevel": "low",
+      "oxalateLevel": "moderate",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "none",
+      "lectinLevel": "high",
+      "nightshade": true,
+      "salicylateLevel": "high",
+      "amineLevel": "moderate",
+      "glutamateLevel": "high",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Cheese Strings (likely string cheese or similar)",
+      "fodmapLevel": "low",
+      "histamineLevel": "moderate",
+      "sulfurLevel": "low",
+      "oxalateLevel": "low",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "low",
+      "lectinLevel": "low",
+      "nightshade": false,
+      "salicylateLevel": "low",
+      "amineLevel": "moderate",
+      "glutamateLevel": "moderate",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Walnuts",
+      "fodmapLevel": "low",
+      "histamineLevel": "low",
+      "sulfurLevel": "high",
+      "oxalateLevel": "high",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "none",
+      "lectinLevel": "low",
+      "nightshade": false,
+      "salicylateLevel": "moderate",
+      "amineLevel": "low",
+      "glutamateLevel": "low",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    },
+    {
+      "name": "Black Coffee",
+      "fodmapLevel": "low",
+      "histamineLevel": "moderate",
+      "sulfurLevel": "low",
+      "oxalateLevel": "high",
+      "glutenLevel": "none",
+      "dairyLactoseLevel": "none",
+      "lectinLevel": "low",
+      "nightshade": false,
+      "salicylateLevel": "high",
+      "amineLevel": "low",
+      "glutamateLevel": "low",
+      "hasGums": false,
+      "hasArtificialSweeteners": false,
+      "hasPreservatives": false
+    }
+  ]
+}</script>
+  <script>
+  (function () {
+    var d = JSON.parse(document.getElementById('demoData').textContent);
+
+    // Which markers exist, what to call them, and how the app decides one is
+    // worth a chip. Same order and same rules as buildSensitivityMarkers.
+    var MARKERS = [
+      ['fodmapLevel',             'FODMAP',                'level'],
+      ['histamineLevel',          'histamine',             'level'],
+      ['sulfurLevel',             'sulfur',                'level'],
+      ['oxalateLevel',            'oxalate',               'level'],
+      ['glutenLevel',             'Gluten',                'gluten'],
+      ['dairyLactoseLevel',       'lactose',               'dairy'],
+      ['lectinLevel',             'lectins',               'level'],
+      ['nightshade',              'Nightshades',           'bool'],
+      ['salicylateLevel',         'salicylates',           'level'],
+      ['amineLevel',              'amines',                'level'],
+      ['glutamateLevel',          'glutamates',            'level'],
+      ['hasGums',                 'Gums',                  'bool'],
+      ['hasArtificialSweeteners', 'Artificial sweeteners', 'bool'],
+      ['hasPreservatives',        'Preservatives',         'bool']
+    ];
+    var HIGH = '#B5544A', MOD = '#C98A3C';
+    function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+    function markers(src, keyOf) {
+      var flagged = [], clear = [];
+      MARKERS.forEach(function (m) {
+        var v = src[keyOf(m[0])], name = m[1], kind = m[2], on;
+        if (v === undefined || v === null) return;
+        if (kind === 'level') {
+          on = (v === 'high' || v === 'moderate');
+          (on ? flagged : clear).push({
+            label: on ? cap(v) + ' ' + name : cap(name),
+            color: v === 'high' ? HIGH : MOD });
+        } else if (kind === 'gluten') {
+          on = (v === 'contains' || v === 'traces');
+          (on ? flagged : clear).push({
+            label: v === 'contains' ? 'Contains gluten'
+                 : v === 'traces'   ? 'Traces of gluten' : 'Gluten',
+            color: v === 'contains' ? HIGH : MOD });
+        } else if (kind === 'dairy') {
+          on = (v === 'high' || v === 'low');
+          (on ? flagged : clear).push({
+            label: on ? cap(v) + ' lactose' : 'Lactose',
+            color: v === 'high' ? HIGH : MOD });
+        } else {
+          (v ? flagged : clear).push({ label: name, color: HIGH });
+        }
+      });
+      return { flagged: flagged, clear: clear };
+    }
+
+    var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"'
+              + ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+              + '<path d="m5 12.5 4.5 4.5L19 7"/></svg>';
+    var chipsEl = document.getElementById('demoChips');
+    var open = false;
+
+    function paint(m) {
+      chipsEl.innerHTML = '';
+      open = false;
+
+      m.flagged.forEach(function (f, i) {
+        var el = document.createElement('span');
+        el.className = 'demo-chip';
+        el.style.background = f.color + '1F';
+        el.style.color = f.color;
+        el.style.animationDelay = (i * 55) + 'ms';
+        el.textContent = f.label;
+        chipsEl.appendChild(el);
+      });
+
+      if (!m.clear.length) return;
+
+      // The collapse. Everything the analysis cleared says nothing on its own,
+      // so it is one line until asked for.
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'demo-chip demo-chip-clear';
+      btn.style.animationDelay = (m.flagged.length * 55) + 'ms';
+
+      function label() {
+        return m.flagged.length
+          ? 'Clear on ' + m.clear.length + ' other' + (m.clear.length > 1 ? 's' : '')
+          : 'No flags on ' + m.clear.length + ' markers';
+      }
+      function render() {
+        btn.innerHTML = CHECK + '<span>' + (open ? 'Show less' : label()) + '</span>';
+      }
+      btn.onclick = function () {
+        open = !open;
+        var was = chipsEl.querySelectorAll('.demo-chip-was');
+        Array.prototype.forEach.call(was, function (n) { n.remove(); });
+        if (open) {
+          m.clear.forEach(function (c, i) {
+            var el = document.createElement('span');
+            el.className = 'demo-chip demo-chip-was';
+            el.style.animationDelay = (i * 30) + 'ms';
+            el.innerHTML = CHECK + '<span>' + c.label + '</span>';
+            chipsEl.insertBefore(el, btn);
+          });
+        }
+        render();
+      };
+      render();
+      chipsEl.appendChild(btn);
+    }
+
+    // The plate as a whole stores the same markers under `overall` names.
+    function overallKey(k) {
+      if (k === 'nightshade') return 'hasNightshades';
+      if (k.indexOf('has') === 0) return k;
+      return 'overall' + cap(k);
+    }
+    function ownKey(k) { return k; }
+
+    document.getElementById('demoSummary').textContent = d.summary;
+    document.getElementById('demoCount').textContent = '(' + d.foods.length + ')';
+
+    var titleEl = document.getElementById('demoTitle');
+    var foodsEl = document.getElementById('demoFoods');
+    var buttons = [];
+
+    function select(btn, src, keyOf, title) {
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      titleEl.textContent = title;
+      paint(markers(src, keyOf));
+    }
+
+    var whole = document.createElement('button');
+    whole.type = 'button';
+    whole.className = 'demo-food demo-food-all';
+    whole.textContent = 'Whole plate';
+    whole.onclick = function () { select(whole, d.overall, overallKey, d.mealName); };
+    foodsEl.appendChild(whole);
+    buttons.push(whole);
+
+    d.foods.forEach(function (food) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'demo-food';
+      // The analysis hedges in brackets ("likely pesto or herb dip"). The
+      // button only has room for the name; the full string is the tooltip.
+      b.textContent = food.name.replace(/\s*\([^)]*\)\s*/g, ' ').trim();
+      b.title = food.name;
+      b.onclick = function () { select(b, food, ownKey, food.name); };
+      foodsEl.appendChild(b);
+      buttons.push(b);
+    });
+
+    select(whole, d.overall, overallKey, d.mealName);
+  })();
+  </script>
 </body>
 </html>

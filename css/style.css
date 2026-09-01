@@ -123,11 +123,15 @@ img, svg { max-width: 100%; display: block; }
 /* --------------------------------------------------------------------------
    Header
 
-   Sits on moss, and so does the hero — so at the top of the page the header
-   dissolves into it and only separates once you scroll past onto the ground.
-   No JS scroll listener needed to get that.
+   Sits on moss, and so does the hero, so the two read as a single field at the
+   top of the page rather than a bar sitting on top of one.
+
+   It sticks, so the mark stays in the corner as you scroll.
    -------------------------------------------------------------------------- */
 header {
+  /* Sticky, so the mark is in the top-left corner wherever you are on the
+     page rather than only at the very top of the document. The footer keeps
+     its own mark — two is normal, and the footer one is the way back up. */
   position: sticky;
   top: 0;
   z-index: 100;
@@ -135,7 +139,16 @@ header {
   color: var(--on-moss);
 }
 
+/* The header breaks out of the content column and runs the full width, so the
+   mark sits in the actual top-left corner and the nav in the top-right. That
+   is full-bleed chrome rather than page grid: the mark no longer shares a left
+   edge with the H1 below it, which is the trade being made on purpose.
+
+   The footer does the opposite and centres — see below. Neither is on the
+   column, so nothing is half-committed to it. */
 header .container {
+  max-width: none;
+  padding-inline: clamp(1rem, 2.2vw, 1.75rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -175,6 +188,7 @@ header nav a:hover { color: var(--cream); }
    -------------------------------------------------------------------------- */
 .hero {
   background: var(--moss);
+  overflow: hidden;
   color: var(--on-moss);
   padding-block: clamp(3rem, 9vw, 6.5rem) clamp(3.5rem, 10vw, 7rem);
 }
@@ -188,7 +202,7 @@ header nav a:hover { color: var(--cream); }
 /* Two-up only once there is room for a phone beside the type. Until the
    screenshot slot is filled the grid stays one column regardless. */
 @media (min-width: 900px) {
-  .hero-inner:has(.hero-shot) { grid-template-columns: 1.15fr .85fr; }
+  .hero-inner:has(.hero-shot) { grid-template-columns: 1fr 1fr; }
 }
 
 .hero-copy { max-width: 34ch; }
@@ -363,7 +377,7 @@ header nav a:hover { color: var(--cream); }
 .device {
   width: 100%;
   max-width: 260px;
-  aspect-ratio: 1170 / 2532;
+  aspect-ratio: 1206 / 2622;
   border-radius: 34px;
   padding: 7px;
   background: var(--ink);
@@ -379,8 +393,198 @@ header nav a:hover { color: var(--cream); }
   background: var(--sage-100);
 }
 
-.hero-shot { display: grid; justify-items: center; }
-.hero-shot .device { max-width: 288px; }
+/* Two phones, offset and overlapping. Static on purpose: the hero's job is
+   the promise and the two store buttons, and a rotating carousel beside a CTA
+   spends attention it cannot get back. The composition fills the space; it
+   just does not move to do it.
+
+   Both sit in one grid cell and are pushed apart with transforms, so there is
+   no absolute positioning to keep in sync. The back phone deliberately runs
+   past the container — .hero clips it, which is what makes it read as a stack
+   continuing off-frame rather than two phones that happen to touch. */
+.hero-shot {
+  display: grid;
+  grid-template-areas: 'stack';
+  place-items: center;
+  isolation: isolate;
+}
+
+.hero-phone {
+  grid-area: stack;
+  /* The single entrance. The offsets live on .device below, so this wrapper
+     is free to animate without having to restate them in the keyframes. */
+  animation: hero-phone-in .7s cubic-bezier(.2, .7, .25, 1) both;
+}
+
+.hero-phone-back  { z-index: 1; animation-delay: .1s; }
+.hero-phone-front { z-index: 2; animation-delay: .22s; }
+
+.hero-phone .device { max-width: 250px; }
+
+.hero-phone-back .device {
+  transform: translate(30%, -7%) scale(.88) rotate(3.5deg);
+  /* Pushed back a step so the front phone reads as nearer. */
+  filter: brightness(.94) saturate(.94);
+  box-shadow: 0 22px 50px rgba(20, 31, 25, .3);
+}
+
+.hero-phone-front .device {
+  transform: translate(-13%, 5%);
+  box-shadow: 0 24px 54px rgba(20, 31, 25, .38);
+}
+
+@keyframes hero-phone-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* One phone is plenty when the hero is a single column — two overlapping at
+   phone width is a pile, not a composition. */
+@media (max-width: 899px) {
+  .hero-phone-back { display: none; }
+  .hero-phone-front .device { transform: none; }
+  .hero-phone .device { max-width: 264px; }
+}
+
+/* --------------------------------------------------------------------------
+   The scan demo
+
+   A real analysis, frozen. The page makes no network call — the JSON is
+   inlined in a <script type="application/json"> and the whole thing is a
+   lookup. Nothing here talks to an endpoint, and nothing needs a key.
+   -------------------------------------------------------------------------- */
+.demo {
+  background: var(--surface-alt);
+  border-block: 1px solid var(--line);
+  padding-block: clamp(3.5rem, 9vw, 6rem);
+}
+
+.demo h2 { font-size: clamp(1.75rem, 3.6vw, 2.5rem); max-width: 22ch; }
+
+.demo-lede {
+  margin-top: 1rem;
+  max-width: 56ch;
+  color: var(--ink-secondary);
+}
+
+.demo-grid {
+  margin-top: clamp(2rem, 5vw, 3rem);
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .demo-grid { grid-template-columns: 420px 1fr; }
+}
+
+.demo-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(20, 31, 25, .16);
+}
+
+.demo-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.demo-panel h3 {
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  font-variation-settings: 'opsz' 72;
+  min-height: 2.4em;      /* holds its height as the name changes */
+}
+
+.demo-summary {
+  margin-top: .5rem;
+  font-size: .95rem;
+  color: var(--ink-secondary);
+}
+
+.demo-prompt {
+  margin-top: 1.5rem;
+  margin-bottom: .7rem;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-variation-settings: 'opsz' 9;
+}
+
+.demo-chips,
+.demo-foods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  align-items: center;
+}
+
+.demo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .3rem .65rem;
+  border-radius: 8px;
+  border: 0;
+  font-family: inherit;
+  font-size: .85rem;
+  font-weight: 500;
+  font-variation-settings: 'opsz' 9;
+  animation: chip-rise .3s cubic-bezier(.2, .7, .3, 1) both;
+}
+
+.demo-chip svg { width: 13px; height: 13px; flex: none; }
+
+.demo-chip-clear,
+.demo-chip-was {
+  background: var(--surface-alt);
+  color: var(--ink-muted);
+}
+
+.demo-chip-clear { cursor: pointer; }
+.demo-chip-clear:hover { background: var(--cream); color: var(--ink-secondary); }
+
+@keyframes chip-rise {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-chip { animation: none; }
+}
+
+.demo-food {
+  font-family: inherit;
+  font-size: .875rem;
+  background: transparent;
+  color: var(--ink-secondary);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .35rem .75rem;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.demo-food:hover { background: var(--surface-alt); color: var(--ink); }
+
+.demo-food[aria-pressed="true"] {
+  background: var(--moss);
+  border-color: var(--moss);
+  color: var(--cream);
+}
+
+.demo-food-all { font-weight: 600; }
+
+.demo-note {
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  max-width: var(--measure);
+  font-size: .9rem;
+  color: var(--ink-muted);
+}
 
 /* --------------------------------------------------------------------------
    Closing
@@ -458,25 +662,76 @@ footer {
   font-size: .925rem;
 }
 
-footer .container { display: grid; gap: .85rem; }
+/* Centred, not on the column. The footer is the one place the spine is worth
+   breaking: there is no headline here for the mark to line up under, and a
+   short stack of links reads better balanced on an axis than ranged left
+   against a column edge that ended two sections ago. */
+footer .container {
+  display: grid;
+  justify-items: center;
+  gap: .7rem;
+  text-align: center;
+}
+
+/* The other half of the bookend. Same mark, same left edge as everything else
+   on the page, and a way back to the top now that the header has gone. */
+.footer-logo {
+  font-size: 1.2rem;
+  margin-bottom: .35rem;
+}
+
+.footer-logo .logo-mark { width: 30px; height: 30px; }
+
+/* Brand glyphs, in matching circles. The containers are what make them read
+   as a set — TikTok's mark is solid where the other two are line drawings,
+   and without a shared frame that difference is the thing you notice. */
+.footer-social {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: .6rem;
+  margin-top: .35rem;
+  margin-bottom: .35rem;
+}
+
+.footer-social a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 239, 228, .28);
+  color: var(--cream);
+  transition: background-color .16s ease, border-color .16s ease;
+}
+
+.footer-social a:hover {
+  background: rgba(244, 239, 228, .12);
+  border-color: rgba(244, 239, 228, .5);
+  color: var(--cream);
+}
+
+.footer-social svg { width: 19px; height: 19px; }
 
 .footer-links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
 }
 
-.footer-links a,
-.footer-contact a { color: var(--cream); text-decoration: none; }
-.footer-links a:hover,
-.footer-contact a:hover { color: var(--cream); text-decoration: underline; }
+.footer-links a { color: var(--cream); text-decoration: none; }
+.footer-links a:hover { color: var(--cream); text-decoration: underline; }
 
-.footer-note {
-  max-width: var(--measure);
+/* The disclaimer and the copyright were two rows saying quiet things. On one
+   line they are still both legible and the footer is two rows shorter. */
+.footer-fine {
+  max-width: 68ch;
+  text-wrap: balance;
   font-size: .85rem;
   color: #8B9C91;
-  padding-top: .75rem;
+  padding-top: .8rem;
   border-top: 1px solid rgba(244, 239, 228, .14);
 }
 
-.footer-copyright { font-size: .85rem; color: #8B9C91; }
+.footer-sep { opacity: .5; padding-inline: .35rem; }
