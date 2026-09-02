@@ -419,7 +419,9 @@ header nav a:hover { color: var(--cream); }
 .hero-phone-back  { z-index: 1; animation-delay: .1s; }
 .hero-phone-front { z-index: 2; animation-delay: .22s; }
 
-.hero-phone .device { max-width: 250px; }
+/* Explicit width, not a percentage. See the note above: the parent is
+   fit-content here, so a percentage has nothing definite to resolve against. */
+.hero-phone .device { width: 250px; max-width: none; }
 
 .hero-phone-back .device {
   transform: translate(30%, -7%) scale(.88) rotate(3.5deg);
@@ -448,7 +450,7 @@ header nav a:hover { color: var(--cream); }
    stack scales with the phone instead of overflowing the small ones. .hero
    still clips whatever runs past the edge. */
 @media (max-width: 899px) {
-  .hero-phone .device { max-width: min(216px, 47vw); }
+  .hero-phone .device { width: min(216px, 47vw); max-width: none; }
 
   .hero-phone-back .device {
     transform: translate(33%, -5%) scale(.86) rotate(3.5deg);
