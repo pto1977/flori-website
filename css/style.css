@@ -438,12 +438,25 @@ header nav a:hover { color: var(--cream); }
   to   { opacity: 1; transform: none; }
 }
 
-/* One phone is plenty when the hero is a single column — two overlapping at
-   phone width is a pile, not a composition. */
+/* Both phones survive on a narrow screen, just smaller and with a tighter
+   offset. An earlier version hid the back one below 900px on the grounds that
+   two overlapping phones at phone width would be a pile. That left the mobile
+   hero thinner than the desktop one, which is backwards for the screen most
+   people will actually arrive on.
+
+   The pair is sized off the viewport rather than a fixed pixel value, so the
+   stack scales with the phone instead of overflowing the small ones. .hero
+   still clips whatever runs past the edge. */
 @media (max-width: 899px) {
-  .hero-phone-back { display: none; }
-  .hero-phone-front .device { transform: none; }
-  .hero-phone .device { max-width: 264px; }
+  .hero-phone .device { max-width: min(216px, 47vw); }
+
+  .hero-phone-back .device {
+    transform: translate(33%, -5%) scale(.86) rotate(3.5deg);
+  }
+
+  .hero-phone-front .device {
+    transform: translate(-15%, 4%);
+  }
 }
 
 /* --------------------------------------------------------------------------
