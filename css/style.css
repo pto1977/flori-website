@@ -377,7 +377,12 @@ header nav a:hover { color: var(--cream); }
 .device {
   width: 100%;
   max-width: 260px;
-  aspect-ratio: 1206 / 2622;
+  /* The screenshots are cropped past the status bar and the tab bar, so this
+     is no longer a whole phone and does not pretend to be one. Six captures
+     each carrying a different clock and battery read as six separate photos
+     rather than one tour, and the tab bar in four of them predates its being
+     made opaque -- page content shows through it. */
+  aspect-ratio: 604 / 1056;
   border-radius: 34px;
   padding: 7px;
   background: var(--ink);
