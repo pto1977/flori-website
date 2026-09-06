@@ -195,7 +195,11 @@ header nav a:hover { color: var(--cream); }
 
 .hero-inner {
   display: grid;
-  gap: clamp(2.5rem, 6vw, 4rem);
+  /* Opened up after the screenshots were cropped. The frames lost 257px of
+     height, so the same gap read tighter against them than it had against
+     full-length phones — the hero is the one place on the page with nothing
+     competing for the space, and it can afford the air. */
+  gap: clamp(3.25rem, 7.5vw, 5.25rem);
   align-items: center;
 }
 
@@ -407,6 +411,13 @@ header nav a:hover { color: var(--cream); }
    no absolute positioning to keep in sync. The back phone deliberately runs
    past the container — .hero clips it, which is what makes it read as a stack
    continuing off-frame rather than two phones that happen to touch. */
+/* One shape for both. The depth is already carried by scale(.88), the
+   rotation and the dimmed brightness below; a different aspect ratio on top
+   of that made them two differently-shaped objects rather than one phone seen
+   twice. hero-home is padded to this height with its own ground colour,
+   because its tab bar starts at 1140 and it cannot be cropped any taller. */
+.hero-phone .device { aspect-ratio: 604 / 1122; }
+
 .hero-shot {
   display: grid;
   grid-template-areas: 'stack';
