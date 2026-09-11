@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Flori</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Download Flori for iPhone, iPad and Android.">
+<style>
+  :root { --moss:#3D5646; --deep:#202F26; --cream:#F4EFE4; --terra:#D98A52; --sage:#A3C2B6; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:var(--moss); color:var(--cream); text-align:center; padding:32px;
+         font-family:Georgia,'Times New Roman',serif; }
+  .wrap { max-width:420px; width:100%; }
+  h1 { font-size:34px; margin:0 0 8px; font-weight:700; }
+  p  { color:var(--sage); margin:0 0 28px; line-height:1.5; font-size:17px; }
+  a.btn { display:block; padding:16px 20px; margin:12px 0; border-radius:14px;
+          text-decoration:none; font-size:17px; background:var(--cream); color:var(--deep); }
+  a.btn.alt { background:transparent; color:var(--cream); border:1.5px solid rgba(244,239,228,.45); }
+  .accent { color:var(--terra); }
+  small { display:block; margin-top:26px; color:var(--sage); opacity:.75; font-size:13px; line-height:1.5; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Know what <span class="accent">sets you off</span></h1>
+    <p id="msg">Taking you to the app store…</p>
+    <a class="btn" id="ios" href="https://apps.apple.com/app/id6759988365">Download for iPhone &amp; iPad</a>
+    <a class="btn alt" id="android" href="https://play.google.com/store/apps/details?id=com.myflori.app">Download for Android</a>
+    <small>Flori is a wellness tracking tool and does not provide medical advice,
+    diagnosis or treatment.</small>
+  </div>
+<script>
+(function () {
+  var ua = navigator.userAgent || '';
+  // iPadOS reports itself as a Mac, so touch points are what separate them.
+  var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+              (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var isAndroid = /Android/.test(ua);
+  var target = isIOS ? document.getElementById('ios').href
+             : isAndroid ? document.getElementById('android').href
+             : null;
+  if (target) {
+    location.replace(target);          // replace, so Back does not trap the visitor here
+  } else {
+    document.getElementById('msg').textContent = 'Choose your device.';
+  }
+})();
+</script>
+</body>
+</html>
