@@ -34,10 +34,19 @@
 <script>
 (function () {
   var ua = navigator.userAgent || '';
+  var touch = (navigator.maxTouchPoints || 0) > 1;
+
   // iPadOS reports itself as a Mac, so touch points are what separate them.
-  var isIOS = /iPad|iPhone|iPod/.test(ua) ||
-              (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-  var isAndroid = /Android/.test(ua);
+  var isIOS = /iPad|iPhone|iPod/.test(ua) || (/Macintosh/.test(ua) && touch);
+
+  // Android tablets are the same problem from the other side. Chrome asks for
+  // the desktop site by default on a large Android screen, and in that mode
+  // the user-agent drops the word Android altogether -- it says X11; Linux
+  // x86_64. Testing for the word alone sent every Android tablet to the
+  // choose-your-device fallback. So: anything that takes touch and is not
+  // iOS or Windows. That also picks up Chromebooks, which can install from
+  // Play, and leaves touchscreen Windows laptops to choose for themselves.
+  var isAndroid = !isIOS && (/Android/.test(ua) || (touch && !/Windows/.test(ua)));
   var target = isIOS ? document.getElementById('ios').href
              : isAndroid ? document.getElementById('android').href
              : null;
