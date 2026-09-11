@@ -28,13 +28,16 @@
     <p id="msg">Taking you to the app store…</p>
     <a class="btn" id="ios" href="https://apps.apple.com/app/id6759988365">Download for iPhone &amp; iPad</a>
     <a class="btn alt" id="android" href="https://play.google.com/store/apps/details?id=com.myflori.app">Download for Android</a>
+    <small id="diag" style="opacity:.5;font-size:11px;word-break:break-all"></small>
     <small>Flori is a wellness tracking tool and does not provide medical advice,
     diagnosis or treatment.</small>
   </div>
 <script>
 (function () {
   var ua = navigator.userAgent || '';
-  var touch = (navigator.maxTouchPoints || 0) > 1;
+  var touch = (navigator.maxTouchPoints || 0) > 0 ||
+              ('ontouchstart' in window) ||
+              (window.matchMedia && matchMedia('(pointer: coarse)').matches);
 
   // iPadOS reports itself as a Mac, so touch points are what separate them.
   var isIOS = /iPad|iPhone|iPod/.test(ua) || (/Macintosh/.test(ua) && touch);
@@ -54,6 +57,14 @@
     location.replace(target);          // replace, so Back does not trap the visitor here
   } else {
     document.getElementById('msg').textContent = 'Choose your device.';
+    // If a phone or tablet lands here, this says why. Whatever a device
+    // reports is the only thing worth trusting; everything above is a guess
+    // about what it might say.
+    var d = document.getElementById('diag');
+    d.textContent = 'touchPoints ' + (navigator.maxTouchPoints || 0) +
+                    ' · coarse ' + !!(window.matchMedia &&
+                      matchMedia('(pointer: coarse)').matches) +
+                    ' · ' + navigator.userAgent;
   }
 })();
 </script>
