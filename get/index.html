@@ -60,6 +60,11 @@
     // If a phone or tablet lands here, this says why. Whatever a device
     // reports is the only thing worth trusting; everything above is a guess
     // about what it might say.
+    // Only on /get?debug. A visitor who cannot be routed should see two
+    // buttons, not a user-agent string -- but when a device will not route,
+    // what it reports is the only thing worth trusting: three guesses at what
+    // an Android tablet calls itself were wrong before this line settled it.
+    if (!/(^|[?&])debug($|[=&])/.test(location.search)) return;
     var d = document.getElementById('diag');
     d.textContent = 'touchPoints ' + (navigator.maxTouchPoints || 0) +
                     ' · coarse ' + !!(window.matchMedia &&
